@@ -1,16 +1,16 @@
 import * as crypto from 'crypto';
-import { Injectable, NotAcceptableException } from '@nestjs/common'
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
-import { User, UserFillableFields } from './user.entity';
+import { UserFillableFields } from './user.entity';
+import { UsersRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
 
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(UsersRepository)
+    private readonly userRepository: UsersRepository,
   ) { }
 
   async get(id: number) {
@@ -33,19 +33,15 @@ export class UsersService {
       .getOne();
   }
 
-  async create(
-    payload: UserFillableFields
-  ) {
-    let user = await this.getByEmail(payload.email);
-
+  async create(payload: UserFillableFields) {
+    const user = await this.getByEmail(payload.email);
     if (user) {
       throw new NotAcceptableException(
-        'User with provided email already created.'
+        'User with provided email already created.',
       );
     }
-
     return await this.userRepository.save(
-      this.userRepository.create(payload)
+      this.userRepository.create(payload),
     );
   }
 }

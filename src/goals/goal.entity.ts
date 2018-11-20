@@ -1,7 +1,8 @@
 import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity, ManyToMany } from 'typeorm';
 import { User } from '../user/user.entity';
 import { GoalStatuses } from './interfaces';
+import { Quest } from '../quests/quest.entity';
 
 @Entity({ name: 'goal' })
 export class Goal extends BaseEntity {
@@ -19,6 +20,9 @@ export class Goal extends BaseEntity {
 
   @Column({ enum: GoalStatuses, default: GoalStatuses.InProgress })
   status: GoalStatuses;
+
+  @ManyToMany(type => Quest, quest => quest.goals)
+  quests: Quest[];
 
   @ManyToOne(type => User, user => user.goals)
   user: User;

@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from './config';
 import { AuthModule } from './auth';
 import { GoalsModule } from 'goals/goals.module';
+import { QuestsModule } from 'quests/quests.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { GoalsModule } from 'goals/goals.module';
     ConfigModule,
     AuthModule,
     GoalsModule,
+    QuestsModule,
   ],
   controllers: [
     AppController,

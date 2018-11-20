@@ -3,10 +3,3 @@ export enum GoalStatuses {
   Completed = 'Completed',
   Failed = 'Failed',
 }
-
-export class GoalFillableFields {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}

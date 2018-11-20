@@ -1,15 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class CreateGoalDto {
+export class CreateQuestDto {
   @ApiModelProperty()
-  readonly title: string;
+  readonly name: string;
 
   @ApiModelProperty()
   readonly description: string;
 
   @ApiModelProperty()
-  readonly awards: number;
-
-  @ApiModelProperty()
-  readonly categories?: number | number[];
+  readonly currentDifficulty: number;
 }

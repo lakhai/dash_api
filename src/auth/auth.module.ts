@@ -20,7 +20,7 @@ import { AuthController } from './auth.controller';
         return {
           secretOrPrivateKey: configService.get('JWT_SECRET_KEY'),
           signOptions: {
-            expiresIn: parseInt(configService.get('JWT_EXPIRATION_TIME')),
+            expiresIn: +configService.get('JWT_EXPIRATION_TIME'),
           },
         };
       },

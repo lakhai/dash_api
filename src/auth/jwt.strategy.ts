@@ -23,6 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (timeDiff <= 0) {
       throw new UnauthorizedException();
     }
+    done(null, user);
     return user;
   }
 }

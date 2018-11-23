@@ -4,7 +4,6 @@ import { AuthService, LoginPayload, RegisterPayload } from './';
 import { UsersService, User } from './../user';
 import { CurrentUser } from 'user/current-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard, SessionGuard } from './jwt-guard';
 
 @Controller('auth')
 @ApiUseTags('authentication')
@@ -34,7 +33,7 @@ export class AuthController {
   }
 
   @Get('user')
-  @UseGuards(AuthGuard())
+  @UseGuards(AuthGuard('jwt'))
   @ApiOperation({ title: 'Get Current User Info' })
   async getUserInfo(@CurrentUser() user: User) {
     return user;

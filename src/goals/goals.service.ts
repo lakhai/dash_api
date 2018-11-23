@@ -7,6 +7,7 @@ import { User } from 'user';
 import { UpdateGoalDto } from './interfaces/UpdateGoalDto';
 import { GoalsRepository } from './goals.repository';
 import { convertToNegative } from 'helpers/convertToNegative';
+import { GoalStatuses } from './interfaces';
 
 @Injectable()
 export class GoalsService {
@@ -73,6 +74,8 @@ export class GoalsService {
   async complete(id: number) {
     try {
       const goal = await this.get(id);
+      goal.status = GoalStatuses.Completed;
+      await goal.save();
       await goal.user.handleChangeXp(goal.awards);
       return goal.user;
     } catch (e) {
@@ -83,6 +86,8 @@ export class GoalsService {
   async fail(id: number) {
     try {
       const goal = await this.get(id);
+      goal.status = GoalStatuses.Failed;
+      await goal.save();
       await goal.user.handleChangeXp(convertToNegative(goal.awards / 2));
       return goal.user;
     } catch (e) {

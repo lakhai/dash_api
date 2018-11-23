@@ -6,6 +6,7 @@ import { ConfigModule } from './config';
 import { AuthModule } from './auth';
 import { GoalsModule } from 'goals/goals.module';
 import { QuestsModule } from 'quests/quests.module';
+import { JournalModule } from 'journal/journal.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { QuestsModule } from 'quests/quests.module';
     AuthModule,
     GoalsModule,
     QuestsModule,
+    JournalModule,
   ],
   controllers: [
     AppController,

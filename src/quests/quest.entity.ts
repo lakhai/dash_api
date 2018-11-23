@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity, ManyToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, BaseEntity, ManyToMany, JoinTable } from 'typeorm';
 import { Goal } from 'goals/goal.entity';
 import { User } from 'user';
 
@@ -17,8 +17,13 @@ export class Quest extends BaseEntity {
   currentDifficulty: number;
 
   @ManyToMany(type => Goal, goal => goal.quests)
+  @JoinTable()
   goals: Goal[];
 
-  @ManyToOne(type => User, user => user.goals)
+  @ManyToMany(type => Quest, quest => quest.quests)
+  @JoinTable()
+  quests: Quest[];
+
+  @ManyToOne(type => User, user => user.quests)
   user: User;
 }

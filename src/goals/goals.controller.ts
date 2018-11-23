@@ -15,7 +15,7 @@ import {
 import { includes } from 'lodash';
 import { GoalsService } from './goals.service';
 import { Goal } from './goal.entity';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { CreateGoalDto } from './interfaces/CreateGoalDto';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from 'user/current-user.decorator';
@@ -23,6 +23,7 @@ import { User } from 'user';
 import { UpdateGoalDto } from './interfaces/UpdateGoalDto';
 
 @Controller('goals')
+@ApiUseTags('Goals')
 export class GoalsController {
   constructor(
     private readonly goalsService: GoalsService,

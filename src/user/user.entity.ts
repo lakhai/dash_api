@@ -3,6 +3,8 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, BaseEntity } from 't
 import { PasswordTransformer } from './password.transformer';
 import { Goal } from 'goals/goal.entity';
 import { fibonacci } from './helpers/fibonacci';
+import { Journal } from 'journal/journal.entity';
+import { Quest } from 'quests/quest.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
@@ -28,6 +30,12 @@ export class User extends BaseEntity {
 
   @OneToMany(type => Goal, goal => goal.user)
   goals: Goal[];
+
+  @OneToMany(type => Quest, quest => quest.user)
+  quests: Quest[];
+
+  @OneToMany(type => Journal, journal => journal.user)
+  journal: Journal[];
 
   @Column({ default: 1 })
   currentLevel: number;

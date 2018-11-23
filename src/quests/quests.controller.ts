@@ -4,24 +4,19 @@ import {
   Put,
   Post,
   Delete,
-  Req,
   Body,
-  HttpStatus,
   UseGuards,
-  HttpException,
   Param,
-  ForbiddenException,
 } from '@nestjs/common';
-import { includes } from 'lodash';
 import { QuestsService } from './quests.service';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from 'user/current-user.decorator';
 import { User } from 'user';
 import { CreateQuestDto, UpdateQuestDto } from './interfaces';
-import { Quest } from './quest.entity';
 
 @Controller('quests')
+@ApiUseTags('Quests')
 export class QuestsController {
   constructor(
     private readonly questsService: QuestsService,

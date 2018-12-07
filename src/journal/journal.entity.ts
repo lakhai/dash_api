@@ -22,12 +22,12 @@ export class Journal extends BaseEntity {
   @Column({ enum: JournalStatuses, default: JournalStatuses.Draft })
   status: JournalStatuses;
 
+  @ManyToOne(type => User, user => user.journal)
+  user: User;
+
   @Column({ type: 'datetime' })
   created: string;
 
   @Column({ type: 'datetime' })
   updated: string;
-
-  @ManyToOne(type => User, user => user.journal)
-  user: User;
 }

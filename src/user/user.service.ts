@@ -2,8 +2,9 @@ import * as crypto from 'crypto';
 import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { UserFillableFields } from './user.entity';
+import { UserFillableFields, User } from './user.entity';
 import { UsersRepository } from './users.repository';
+import { UpdateUserDto } from './interfaces';
 
 @Injectable()
 export class UsersService {
@@ -43,5 +44,18 @@ export class UsersService {
     return await this.userRepository.save(
       this.userRepository.create(payload),
     );
+  }
+
+  async update(user: User, data: UpdateUserDto) {
+    const fields = { ...data };
+    if (fields.password) {
+      if (fields.password !== fields.currentPassword) {
+        delete fields.password;
+      }
+    }
+    delete fields.currentPassword;
+    Object.assign(user, fields);
+    await user.save();
+    return user;
   }
 }

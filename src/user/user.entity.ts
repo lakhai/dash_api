@@ -5,11 +5,20 @@ import { Goal } from 'goals/goal.entity';
 import { fibonacci } from './helpers/fibonacci';
 import { Journal } from 'journal/journal.entity';
 import { Quest } from 'quests/quest.entity';
+import { Feed } from 'feeds/feed.entity';
+import { UserSkill } from '../skills/user-skill.entity';
+import { Skill } from 'skills/skill.entity';
 
 @Entity({ name: 'user' })
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  // @Column({ default: null })
+  // avatarUrl: string;
+
+  // @Column({ default: false, nullable: true })
+  // onBoardingFinished: boolean;
 
   @Column({ length: 255 })
   firstName: string;
@@ -36,6 +45,15 @@ export class User extends BaseEntity {
 
   @OneToMany(type => Journal, journal => journal.user)
   journal: Journal[];
+
+  @OneToMany(type => Feed, feed => feed.user)
+  feeds: Feed[];
+
+  @OneToMany(type => UserSkill, userSkill => userSkill.user)
+  skills: UserSkill[];
+
+  @OneToMany(type => Skill, skill => skill.user)
+  createdSkills: Skill[];
 
   @Column({ default: 1 })
   currentLevel: number;

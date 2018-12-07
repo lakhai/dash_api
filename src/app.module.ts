@@ -7,6 +7,9 @@ import { AuthModule } from './auth';
 import { GoalsModule } from 'goals/goals.module';
 import { QuestsModule } from 'quests/quests.module';
 import { JournalModule } from 'journal/journal.module';
+import { FeedsModule } from 'feeds/feeds.module';
+import { UsersController } from './user/users.controller';
+import { SkillsModule } from 'skills/skills.module';
 
 @Module({
   imports: [
@@ -16,9 +19,12 @@ import { JournalModule } from 'journal/journal.module';
     GoalsModule,
     QuestsModule,
     JournalModule,
+    FeedsModule,
+    SkillsModule,
   ],
   controllers: [
     AppController,
+    UsersController,
   ],
   providers: [
     AppService,

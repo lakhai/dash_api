@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from './../config';
 import { UserModule } from './../user';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
+import { AuthResolver } from './auth.resolver';
 import { AuthController } from './auth.controller';
 
 @Module({
@@ -20,7 +21,7 @@ import { AuthController } from './auth.controller';
         return {
           secretOrPrivateKey: configService.get('JWT_SECRET_KEY'),
           signOptions: {
-            expiresIn: +configService.get('JWT_EXPIRATION_TIME'),
+            expiresIn: configService.get('JWT_EXPIRATION_TIME'),
           },
         };
       },
@@ -34,6 +35,7 @@ import { AuthController } from './auth.controller';
   ],
   providers: [
     AuthService,
+    AuthResolver,
     JwtStrategy,
   ],
   exports: [

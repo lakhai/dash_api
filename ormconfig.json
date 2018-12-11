@@ -1,8 +1,8 @@
 {
     "type": "sqlite",
-    "database": "./sqlite-example.sql",
+    "database": "./sqlite-example.db",
     "entities": [
         "src/**/**.entity{.ts,.js}"
     ],
-    "synchronize": false
+    "synchronize": true
 }

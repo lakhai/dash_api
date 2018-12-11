@@ -6,6 +6,7 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -13,8 +14,10 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     // Add your custom authentication logic here
     const httpContext = context.switchToHttp();
     const request = httpContext.getRequest();
+
     super.logIn(request);
-    return super.canActivate(context);
+    return super.canActivate(context); 
+    
   }
 
   handleRequest(err, user, info) {

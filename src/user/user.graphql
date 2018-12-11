@@ -1,0 +1,24 @@
+type User {
+	id: ID!
+	firstName: String!
+	lastName:  String
+	email: String
+	goals: [Goal]
+	quests: [Quest]
+	journal: [Journal]
+	feeds: [Feed]
+	skills: [UserSkill]
+	createdSkills: [Skill]
+	currentLevel: String
+	currentXP: String
+	xpUntilNextLevel: String
+}
+
+
+type Query {
+	users: [User!]
+}
+
+type Query {
+	whoToken: String
+}

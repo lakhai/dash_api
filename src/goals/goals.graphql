@@ -1,0 +1,13 @@
+type Goal {
+	id: ID!
+	title: String!
+	description: String
+	awards: String
+	status: String
+	quests: [Quest]
+	user: User
+}
+
+type Query {
+	goals: [Goal!]
+}

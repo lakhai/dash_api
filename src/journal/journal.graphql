@@ -1,0 +1,13 @@
+type Journal {
+  id: ID!
+  title: String
+  body: String
+  status: String
+  user: User
+  created: String
+  updated: String
+}
+
+type Query {
+  journals: [Journal!]
+}

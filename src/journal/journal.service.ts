@@ -35,7 +35,7 @@ export class JournalService {
   }
 
   async findAll() {
-    return await this.journalRepository.find();
+    return await this.journalRepository.find({ relations: ['user'] });
   }
 
   async create(user: User, data: CreateJournalDto) {

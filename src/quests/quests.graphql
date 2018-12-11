@@ -1,0 +1,15 @@
+type Quest {
+	id: ID!
+	name: String!
+	currentDifficulty: String
+	description: String
+	goals: [Goal!]
+	quests: [Quest!]
+	user: User
+}
+
+
+
+type Query {
+	quests: [Quest!]
+}

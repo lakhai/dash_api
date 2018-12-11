@@ -10,9 +10,14 @@ import { JournalModule } from 'journal/journal.module';
 import { FeedsModule } from 'feeds/feeds.module';
 import { UsersController } from './user/users.controller';
 import { SkillsModule } from 'skills/skills.module';
+import { GraphQLModule } from '@nestjs/graphql'
 
 @Module({
   imports: [
+    GraphQLModule.forRoot({
+      typePaths: ['./**/*.graphql'],
+      context: ({ req }) => ({ headers: req.headers }),
+    }),
     TypeOrmModule.forRoot(),
     ConfigModule,
     AuthModule,

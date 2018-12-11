@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SkillsController } from './skills.controller';
 import { SkillsRepository } from './skills.repository';
 import { UserSkillsRepository } from './user-skills.repository';
+import { SkillResolver } from './skills.resolver';
 
 @Module({
   imports: [
@@ -11,6 +12,9 @@ import { UserSkillsRepository } from './user-skills.repository';
   ],
   controllers: [SkillsController],
   exports: [SkillsService],
-  providers: [SkillsService],
+  providers: [
+  SkillsService,
+  SkillResolver,
+  ],
 })
 export class SkillsModule { }

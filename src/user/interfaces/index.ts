@@ -14,10 +14,10 @@ export class UpdateUserDto {
   readonly email?: string;
 
   @ApiModelProperty()
-  readonly password?: string;
+  password?: string;
 
   @ApiModelProperty()
-  readonly currentPassword?: string;
+  currentPassword?: string;
 }
 
 export interface UserLevelTier {

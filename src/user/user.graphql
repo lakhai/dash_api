@@ -1,0 +1,27 @@
+type User {
+	id: ID!
+	firstName: String!
+	lastName:  String
+	email: String
+	goals: [Goal]
+	quests: [Quest]
+	journal: [Journal]
+	skills: [UserSkill]
+	createdSkills: [Skill]
+	currentLevel: String
+	currentXP: String
+	xpUntilNextLevel: String
+}
+
+
+type Mutation {
+	create(email: String! ,  firstName: String, lastName: String , password: String!): User
+}
+
+type Query {
+	loggedIn: User
+	getByEmail: User
+	getByEmailAndPass: User
+	get: User
+	users: [User!]
+}

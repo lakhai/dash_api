@@ -1,0 +1,8 @@
+type Auth {
+	expiresIn: String!
+	accessToken: String!
+}
+
+type Mutation {
+	login(email: String!, password: String!): Auth
+}

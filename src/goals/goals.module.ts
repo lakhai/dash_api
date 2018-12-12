@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Goal } from './goal.entity';
 import { GoalsController } from './goals.controller';
 import { GoalsRepository } from './goals.repository';
+import { GoalResolver } from './goals.resolver';
 
 @Module({
   imports: [
@@ -11,6 +12,9 @@ import { GoalsRepository } from './goals.repository';
   ],
   controllers: [GoalsController],
   exports: [GoalsService],
-  providers: [GoalsService],
+  providers: [
+  GoalsService,
+  GoalResolver,
+  ],
 })
 export class GoalsModule { }

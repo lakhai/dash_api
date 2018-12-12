@@ -9,5 +9,6 @@ type Goal {
 }
 
 type Query {
-	goals: [Goal!]
+	goals: [Goal!],
+	userGoals: [Goal!],
 }

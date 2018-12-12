@@ -18,8 +18,8 @@ export class UserResolver {
 
 	@UseGuards(new GqlAuthGuard())
 	@Query()
-	async whoToken(@Context('user') user): Promise<any> {
+	async loggedIn(@Context('user') user): Promise<any> {
 		const { email } = user;
-		return email;
+		return user;
 	} 
   }

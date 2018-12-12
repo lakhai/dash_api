@@ -6,7 +6,6 @@ type User {
 	goals: [Goal]
 	quests: [Quest]
 	journal: [Journal]
-	feeds: [Feed]
 	skills: [UserSkill]
 	createdSkills: [Skill]
 	currentLevel: String
@@ -15,10 +14,14 @@ type User {
 }
 
 
-type Query {
-	users: [User!]
+type Mutation {
+	create(email: String! ,  firstName: String, lastName: String , password: String!): User
 }
 
 type Query {
-	whoToken: String
+	loggedIn: User
+	getByEmail: User
+	getByEmailAndPass: User
+	get: User
+	users: [User!]
 }

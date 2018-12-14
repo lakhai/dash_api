@@ -77,10 +77,8 @@ export function createLevels(skill: Skill): UserLevel[] {
   }
   const levels = [];
   const tiers = [];
-  console.log(skill, skill.complexity === SkillComplexities.Complex, SkillComplexities.Complex, maxXp, tiersByLevel, degrees);
   degrees.forEach((deg, index) => {
     const requiredXp = maxXp * deg;
-    console.log(requiredXp, deg, index);
     if (tiersByLevel > 1) {
       times(tiersByLevel, tier => {
         tiers.push({

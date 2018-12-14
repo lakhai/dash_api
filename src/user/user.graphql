@@ -15,13 +15,19 @@ type User {
 
 
 type Mutation {
-	create(email: String! ,  firstName: String, lastName: String , password: String!): User
+	update(
+	email: String!,
+	firstName: String,
+	lastName: String,
+	password: String,
+	currentPassword: String
+	): User
 }
 
 type Query {
-	loggedIn: User
-	getByEmail: User
-	getByEmailAndPass: User
-	get: User
+	currentUser: User
+	getByEmail(email: String!): User
+	getByEmailAndPass(email: String!, password: String!): User
+	get(id: Int!): User
 	users: [User!]
 }

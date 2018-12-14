@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { Injectable, NotAcceptableException, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import { UserFillableFields, User } from './user.entity';
@@ -49,7 +49,7 @@ export class UsersService {
       this.userRepository.create(payload),
     );
   }
-
+/*
   async update(user: User, data: UpdateUserDto) {
     const fields = { ...data };
     if (fields.password) {
@@ -61,5 +61,20 @@ export class UsersService {
     Object.assign(user, fields);
     await user.save();
     return user;
+  }*/
+
+  async update(user: User, data: UpdateUserDto) {
+    if (data.password){
+      data.currentPassword = crypto.createHmac('sha256', data.password.toString()).digest('hex');
+
+      if (user.password == data.currentPassword ) {
+        data.password = crypto.createHmac('sha256', data.password.toString()).digest('hex');
+      } else {
+        throw new HttpException('Current Password does not match.', HttpStatus.BAD_REQUEST);
+      }
+      
+    }
+    
+    return await this.userRepository.update(user, data);
   }
 }

@@ -16,10 +16,10 @@ export class UserSkill extends BaseEntity {
   @Column({ default: 0 })
   currentXp: number;
 
-  @ManyToOne(type => User, user => user.skills)
+  @ManyToOne(type => User, user => user.skills, {onDelete: 'CASCADE'})
   user: User;
 
-  @ManyToOne(type => Skill, skill => skill.users)
+  @ManyToOne(type => Skill, skill => skill.users, {onDelete: 'CASCADE'})
   skill: Skill;
 
   @CreateDateColumn()

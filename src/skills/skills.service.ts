@@ -41,7 +41,6 @@ export class SkillsService {
 
   async validateUser(id: number, user: User) {
     const skill = await this.get(id);
-    console.log(skill);
     if (!skill) {
       throw new NotFoundException('Skill entry not found');
     }
@@ -86,7 +85,6 @@ export class SkillsService {
   async delete(id: number) {
     try {
       const feed = await this.skillsRepository.findOne(id, {relations: ['user']});
-      console.log(feed);
       return await feed.remove();
     } catch (e) {
       throw new HttpException(e, 500);

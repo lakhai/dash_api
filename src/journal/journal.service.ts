@@ -31,7 +31,7 @@ export class JournalService {
   }
 
   async findByUser(user: User) {
-    return this.journalRepository.find({ user });
+    return this.journalRepository.find({relations: ['user'], where: {user} });
   }
 
   async findAll() {
@@ -55,7 +55,7 @@ export class JournalService {
 
   async update(id: number, data: UpdateJournalDto, user: User) {
     try {
-      const entry = await this.journalRepository.findOne(id);
+      const entry = await this.journalRepository.findOne(id, {relations: ['user']});
       Object.assign(entry, data, {
         updated: moment().format(DateTime.DateTimeDB),
       });

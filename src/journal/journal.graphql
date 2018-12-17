@@ -1,5 +1,5 @@
 type Journal {
-  id: ID!
+  id: ID
   title: String
   body: String
   status: String
@@ -9,5 +9,12 @@ type Journal {
 }
 
 type Query {
-  journals: [Journal!]
+  currentUserJournals: [Journal]
+  getJournalEntry(id: ID!): Journal
+}
+
+type Mutation {
+	createJournal(title: String!, body: String!, status: String!): Journal
+	updateJournal(id: ID!, title: String, body: String, status: String): Journal
+	deleteJournal(id: ID!): Journal
 }

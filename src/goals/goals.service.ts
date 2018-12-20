@@ -32,7 +32,7 @@ export class GoalsService {
   }
 
   async findByUser(user: User) {
-    return this.goalsRepository.find({ user });
+    return this.goalsRepository.find({relations:['user'],where: {user} });
   }
 
   async findAll() {
@@ -53,7 +53,7 @@ export class GoalsService {
 
   async update(id: number, data: UpdateGoalDto, user: User) {
     try {
-      const goal = await this.goalsRepository.findOne(id);
+      const goal = await this.goalsRepository.findOne(id, {relations: ['user']});
       Object.assign(goal, data);
       await goal.save();
       return goal;
@@ -64,7 +64,7 @@ export class GoalsService {
 
   async delete(id: number) {
     try {
-      const goal = await this.goalsRepository.findOne(id);
+      const goal = await this.goalsRepository.findOne(id, {relations: ['user']});
       return await goal.remove();
     } catch (e) {
       throw new HttpException(e, 500);

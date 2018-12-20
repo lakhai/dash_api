@@ -2,7 +2,9 @@ import { Resolver, Query, ResolveProperty, Parent, Mutation, Args } from "@nestj
 import { AuthService } from "./auth.service";
 import { JwtService } from '@nestjs/jwt';
 import { Body } from '@nestjs/common';
+import { UsersService, User } from './../user';
 import { LoginPayload } from './login.payload';
+import { RegisterPayload } from './register.payload';
 
 
 @Resolver('Auth')
@@ -10,6 +12,7 @@ export class AuthResolver {
 	constructor(
 		private readonly authService: AuthService,
 		private readonly jwtService: JwtService,
+		private readonly userService: UsersService,
 		) {}
 
 	@Mutation()
@@ -18,5 +21,12 @@ export class AuthResolver {
 		const user = await this.authService.validateUser(payload);
 		const token = await this.authService.createToken(user);
 		return token;
+	}
+
+	@Mutation()
+	async register(@Args() {email, firstName, lastName, password}: RegisterPayload){
+		const userData = {email, firstName, lastName, password};
+		const user = await this.userService.create(userData);
+		return await this.authService.createToken(user);
 	}
 }

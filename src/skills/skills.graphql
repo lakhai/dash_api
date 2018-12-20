@@ -1,19 +1,38 @@
 type Skill {
-  id: ID!
+  id: ID
   name: String
   complexity: String
   user: User
+  users: [UserSkill]
   created: String
   updated: String
+}
+
+input UserInput{
+  firstName: String!
+  lastName:  String
+  email: String
+}
+
+type SkillLevel {
+  skill: Skill
+  level: Int
 }
 
 type UserSkill {
 	id: ID!
 	skill: Skill
 	user: User
-	currentxp: String
+	currentXp: Int
 }
 
 type Query {
-  userSkills: [Skill!]
+  currentUserSkills: [Skill]
+  getSkill(id: ID!): [SkillLevel]
+}
+
+type Mutation{
+  createSkill(name: String!, complexity: String!): UserSkill!
+  updateSkill(id: ID!, name: String, complexity: String): Skill!
+  deleteSkill(id: ID!): Skill
 }

@@ -5,4 +5,5 @@ type Auth {
 
 type Mutation {
 	login(email: String!, password: String!): Auth
+	register(email: String!, firstName: String!, lastName: String!, password: String!): Auth
 }

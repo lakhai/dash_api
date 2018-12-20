@@ -1,5 +1,5 @@
 type Goal {
-	id: ID!
+	id: ID
 	title: String!
 	description: String
 	awards: String
@@ -9,6 +9,13 @@ type Goal {
 }
 
 type Query {
-	goals: [Goal!],
-	userGoals: [Goal!],
+	currentUserGoals: [Goal!],
+}
+
+type Mutation {
+	createGoal(title: String!, description: String!, awards: Int!, categories: Int): Goal
+	updateGoal(id: ID!, title: String, description: String, awards: Int, categories: Int): Goal
+	deleteGoal(id: ID!): Goal
+	completeGoal(id: ID!): User
+	failGoal(id: ID!): User
 }

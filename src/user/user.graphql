@@ -1,5 +1,5 @@
 type User {
-	id: ID!
+	id: ID
 	firstName: String!
 	lastName:  String
 	email: String
@@ -15,13 +15,7 @@ type User {
 
 
 type Mutation {
-	update(
-	email: String!,
-	firstName: String,
-	lastName: String,
-	password: String,
-	currentPassword: String
-	): User
+	updateUser(email: String, firstName: String, lastName: String, password: String, currentPassword: String ): User
 }
 
 type Query {

@@ -22,7 +22,7 @@ export class UserResolver {
 
 	@UseGuards(new GqlAuthGuard())
 	@Query()
-	async currentUser(@Context('user') user): Promise<any> {
+	async currentUser(@Context('user') user){
 		return user;
 	}
 
@@ -42,13 +42,13 @@ export class UserResolver {
 	}
 
 	@ResolveProperty()
-	async quests(@Parent() user){
+	async quests(@Parent() user: User){
 		return await this.questService.findByUser(user);
 	}
 
 	@UseGuards(new GqlAuthGuard())
 	@Mutation()
-	async update(
+	async updateUser(
 	 @Args() {email,firstName,lastName,password,currentPassword}: UpdateUserDto,
 	 @Context('user') user){
 	 	const data = {email,firstName,lastName,password,currentPassword};

@@ -1,5 +1,5 @@
 type Quest {
-	id: ID!
+	id: ID
 	name: String!
 	currentDifficulty: String
 	description: String
@@ -11,5 +11,11 @@ type Quest {
 
 
 type Query {
-	quests: [Quest!]
+	questsCurrentUser: [Quest]
+}
+
+type Mutation {
+	createQuest(name: String!, description: String!, currentDifficulty: Int!): Quest
+	updateQuest(id: ID!, name: String, description: String, currentDifficulty: Int): Quest
+	deleteQuest(id: ID!): Quest
 }

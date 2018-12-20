@@ -20,25 +20,37 @@ export class SkillsService {
   ) { }
 
   async get(id: number) {
-    return await this.skillsRepository.findOne(id);
+    return await this.skillsRepository.findOne(id, {relations: ['user']});
   }
 
   async findByUser(user: User) {
-    return this.skillsRepository.find({ user });
+    return this.skillsRepository.find({ relations: ['user'], where: {user} });
   }
 
   async findAll() {
-    return await this.skillsRepository.find();
+    return await this.skillsRepository.find({relations: ['user']});
   }
 
   async getCurrentSkills(user: User) {
-    return await this.userSkillsRepository.find({ user });
+    return await this.userSkillsRepository.find({ relations: ['user', 'skill'], where: {user} });;
   }
 
   async getUserSkill(data: { user: User, skill: Skill }) {
     return await this.userSkillsRepository.findOne(data);
   }
 
+  async validateUser(id: number, user: User) {
+    const skill = await this.get(id);
+    if (!skill) {
+      throw new NotFoundException('Skill entry not found');
+    }
+    if (user.id !== skill.user.id) {
+      throw new UnauthorizedException('Skill entry doesn\'t belong to user');
+    }
+    return true;
+  }
+
+  // Add UserSkill creation separately
   async create(user: User, data: CreateSkillDto) {
     try {
       const skill = new Skill();
@@ -59,7 +71,7 @@ export class SkillsService {
 
   async update(id: number, data: UpdateSkillDto, user: User) {
     try {
-      const feed = await this.skillsRepository.findOne(id);
+      const feed = await this.skillsRepository.findOne(id, {relations: ['user']});
       Object.assign(feed, data, {
         updated: moment().format(DateTime.DateTimeDB),
       });
@@ -72,7 +84,7 @@ export class SkillsService {
 
   async delete(id: number) {
     try {
-      const feed = await this.skillsRepository.findOne(id);
+      const feed = await this.skillsRepository.findOne(id, {relations: ['user']});
       return await feed.remove();
     } catch (e) {
       throw new HttpException(e, 500);
